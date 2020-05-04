@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrap-game {
+  width: 400px;
+}
+
+#btn-start-game {
+  padding: 5px;
+  cursor: pointer;
+  border: 1px solid rgb(105, 182, 3);
+  background-color: cyan;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#wrap-cell {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wrap-level-time {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;;
+}
+
+.cell {
+  cursor: pointer;
+  border-radius: 50%;
+  margin: 1px;
+}
+
+#game-over-panel {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(226, 106, 106);
+  border-radius: 20px;
+  font-size: 50px;
+  padding: 50px;
+}

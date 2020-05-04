@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Difference color</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="wrap-game">
+      <div id="btn-start-game">Start Game</div>
+      <div class="wrap-level-time">
+        <div>
+          Level: <span id="level">1</span>
+        </div>
+        <div>
+          Time: <span id="time">20</span>
+        </div>
+      </div>
+
+      <div id="wrap-cell">
+        <div class="cell" style="background-color: red;" isAnswer></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+
+      <div id="game-over-panel">GAME OVER</div>
+    </div>
+  </div>
+</body>
+</html>
