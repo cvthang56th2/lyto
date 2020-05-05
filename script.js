@@ -1,9 +1,9 @@
-let time = 5
-let timeInterval
+let time = 5000
+let level = 1
+let wrapWidth = 400
 let currentColor
 let currentDiffColor
 let gameStarted
-let numOfCell = 4
 let allColors = {
   'Red colors': ['lightsalmon', 'salmon', 'darksalmon', 'lightcoral', 'indianred', 'crimson', 'firebrick', 'red', 'darkred'],
   'Orange colors': ['coral', 'tomato', 'orangered', 'gold', 'orange', 'darkorange'],
@@ -17,41 +17,35 @@ let allColors = {
   'Gray colors': ['gainsboro', 'lightgray', 'silver', 'darkgray', 'gray', 'dimgray', 'lightslategray', 'slategray', 'darkslategray', 'black'],
   'Brown colors': ['cornsilk', 'blanchedalmond', 'bisque', 'navajowhite', 'wheat', 'burlywood', 'tan', 'rosybrown', 'sandybrown', 'goldenrod', 'peru', 'chocolate', 'saddlebrown', 'sienna', 'brown', 'maroon'],
 }
-let wrapWidth = 400
-let level = 1
 $('document').ready(function () {
-  initCells()
-  $('#time').html(time)
   $('#wrap-cell').hide()
   $('#game-over-panel').hide()
   $('#btn-start-game').click(function () {
     startGame()
-    $('#btn-start-game').hide(100)
-    gameStarted = true
   })
-  // $('.cell').click(onClickedCell)
 })
 
 function startGame () {
-  time = 5
-  level = 1
-  $('#time').html(time)
-  $('#level').html(level)
-  initCells()
-  $('#wrap-cell').show(100)
   $('#game-over-panel').hide()
-  timeInterval = setInterval(function () {
-    time -= 1
-    $('#time').html(time)
+  gameStarted = true
+  time = 5000
+  level = 1
+  $('#time').html(time / 1000 + ' secs')
+  $('#level').html(level)
+  $('#wrap-cell').show(100)
+  initCells()
+  let timeInterval = setInterval(function () {
+    time -= 100
+    $('#time').html(time / 1000 + ' secs')
     if (time <= 0) {
-      time = 0
-      $('#time').html(time)
+      $('#time').html(0)
       clearInterval(timeInterval)
-      $('#btn-start-game').show(100)
       gameStarted = false
       $('#game-over-panel').show(100)
+      $('#btn-start-game').show(100)
     }
-  }, 1000)
+  }, 100)
+  $('#btn-start-game').hide(100)
 }
 
 function getRndInteger(min, max) {
@@ -64,12 +58,16 @@ var randomProperty = function (obj) {
 };
 
 function onClickedCell (e) {
-  if (gameStarted && e && e.target && e.target.style.backgroundColor === currentDiffColor) {      
-    time += 1.5
-    level++
-    $('#time').html(time)
-    $('#level').html(level)
-    initCells()
+  if (gameStarted) {
+    if (e && e.target && e.target.style.backgroundColor === currentDiffColor) {
+      time += 1000
+      level++
+      $('#time').html(time / 1000 + ' secs')
+      $('#level').html(level)
+      initCells()
+    } else {
+      $('#wrap-cell').effect('shake', {times: 2})
+    }
   }
 }
 
@@ -77,7 +75,7 @@ function initCells () {
   let colorGroup = randomProperty(allColors)
 
   let cellPerRow = parseInt(level / 5) + 2
-  numOfCell = cellPerRow * cellPerRow
+  let numOfCell = cellPerRow * cellPerRow
   currentColor = getRandomColor(colorGroup)
   currentDiffColor = getRandomColor(colorGroup)
   while (currentDiffColor === currentColor) {
